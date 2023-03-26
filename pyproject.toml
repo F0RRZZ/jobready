@@ -1,0 +1,15 @@
+[tool.black]
+force-exclude = '''
+(
+  /(
+      \.git
+    | \.venv
+    | \.DS_Store
+    | \.idea
+    | build
+    | dist
+  )/
+)
+'''
+line-length = 79
+skip-string-normalization = true
