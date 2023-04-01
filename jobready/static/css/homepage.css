@@ -27,7 +27,7 @@
     background: linear-gradient(
         #1845ad,
         #23a2f6
-    );;
+    );
     transform: translate(-600px, -250px);
 }
 
@@ -105,10 +105,12 @@
 .container .box nav ul li a {
     font-size: 16px;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .container .box nav ul li a:hover {
     color: #ffc404;
+    transition: 0.2s;
 }
 
 .container .box nav .logo {
@@ -162,4 +164,9 @@
     width: 1000px;
     height: auto;
     transform: translateX(430px);
+}
+
+::selection {
+    background: #ff512f;
+    color: white;
 }
