@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login</title>
+  <title>Login</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/login.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/login.css">
+  <link rel="stylesheet" href="../static/css/animate.css">
 </head>
 <body>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    <form method="POST">
-        <h3>Login</h3>
+<div class="background">
+  <div class="shape wow fadeInLeft"></div>
+  <div class="shape wow fadeInRight"></div>
+</div>
+<form method="post">
+  <h3>Login</h3>
 
-        <label for="email">Email</label>
-        <input type="email" placeholder="Email" id="email">
+  <label for="email">Email</label>
+  <input type="email" placeholder="Email" id="email">
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
+  <label for="password">Password</label>
+  <input type="password" placeholder="Password" id="password">
 
-        <button>Log In</button>
-    </form>
+  <button>Log In</button>
+</form>
+<script src="../static/js/wow.min.js"></script>
+<script>
+    new WOW().init();
+</script>
 </body>
 </html>

@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Registration</title>
+  <title>Registration</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/registration.css">
-    <style>
-    </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/registration.css">
+  <link rel="stylesheet" href="../static/css/animate.css">
+  <style>
+  </style>
 </head>
 <body>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    <form method="POST">
-        <h3>Registration</h3>
+<div class="background">
+  <div class="shape wow fadeInLeft"></div>
+  <div class="shape wow fadeInRight"></div>
+</div>
+<form method="POST">
+  <h3>Registration</h3>
 
-        <label for="email">Email</label>
-        <input type="email" placeholder="job@ready.com" id="email">
+  <label for="email">Email</label>
+  <input type="email" placeholder="job@ready.com" id="email">
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
-        <label for="password_confirm">Password Confirm</label>
-        <input type="password" placeholder="Password Confirm" id="password_confirm">
-        <label for="username">Username</label>
-        <input type="text" placeholder="Username" id="username">
+  <label for="password">Password</label>
+  <input type="password" placeholder="Password" id="password">
+  <label for="password_confirm">Password Confirm</label>
+  <input type="password" placeholder="Password Confirm" id="password_confirm">
+  <label for="username">Username</label>
+  <input type="text" placeholder="Username" id="username">
 
-        <button>Log In</button>
-    </form>
+  <button>Log In</button>
+</form>
+<script src="../static/js/wow.min.js"></script>
+<script>
+    new WOW().init();
+</script>
 </body>
 </html>
