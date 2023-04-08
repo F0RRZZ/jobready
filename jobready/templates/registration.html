@@ -20,18 +20,39 @@
 </div>
 <form method="POST">
   <h3>Registration</h3>
+  {{ form.hidden_tag() }}
 
-  <label for="email">Email</label>
-  <input type="email" placeholder="job@ready.com" id="email">
+  {{ form.email.label }}
+  {{ form.email(type="email", placeholder="example@email.com") }}
+  {% for error in form.email.errors %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endfor %}
 
-  <label for="password">Password</label>
-  <input type="password" placeholder="Password" id="password">
-  <label for="password_confirm">Password Confirm</label>
-  <input type="password" placeholder="Password Confirm" id="password_confirm">
-  <label for="username">Username</label>
-  <input type="text" placeholder="Username" id="username">
+  {{ form.password.label }}
+  {{ form.password(type="password", placeholder="password") }}
+  {% for error in form.password.errors %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endfor %}
+  {{ form.password_confirm.label }}
+  {{ form.password_confirm(type="password", placeholder="password") }}
+  {% for error in form.password_confirm.errors %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endfor %}
+  {{ form.username.label }}
+  {{ form.username(type="text", placeholder="Username") }}
+  {% for error in form.username.errors %}
+    <p class="alert alert-danger" role="alert">
+      {{ error }}
+    </p>
+  {% endfor %}
 
-  <button>Log In</button>
+  <button type="submit">Sign up</button>
 </form>
 <script src="../static/js/wow.min.js"></script>
 <script>

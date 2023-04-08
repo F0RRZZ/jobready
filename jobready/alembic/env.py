@@ -1,14 +1,20 @@
+import sys
+
 from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
+
+import data.__all_models
+from data.db_session import SqlAlchemyBase
 
 config = context.config
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = None
+sys.path.insert(0, '/db/database.db')
+target_metadata = SqlAlchemyBase.metadata
 
 
 def run_migrations_offline() -> None:

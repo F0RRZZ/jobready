@@ -18,14 +18,26 @@
 </div>
 <form method="post">
   <h3>Login</h3>
+  {{ form.hidden_tag() }}
 
-  <label for="email">Email</label>
-  <input type="email" placeholder="Email" id="email">
+  {{ form.email.label }}
+  {{ form.email(type="email", placeholder="example@email.com") }}
+  {% for error in form.email.errors %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endfor %}
 
-  <label for="password">Password</label>
-  <input type="password" placeholder="Password" id="password">
+  {{ form.password.label }}
+  {{ form.password(type="password", placeholder="password") }}
+  {% for error in form.password.errors %}
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  {% endfor %}
 
-  <button>Log In</button>
+  <button type="submit">Log in</button>
+  <div>{{ message }}</div>
 </form>
 <script src="../static/js/wow.min.js"></script>
 <script>
