@@ -25,4 +25,5 @@ class Resume(SerializerMixin, SqlAlchemyBase):
     expierence = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     education = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     achievments = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    template_name = sqlalchemy.Column(sqlalchemy.String)
     user = orm.relationship('User')

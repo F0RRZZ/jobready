@@ -1,6 +1,5 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, file
 import wtforms
-from wtforms import validators
 from wtforms.validators import DataRequired
 
 
@@ -21,8 +20,11 @@ class LoginForm(FlaskForm):
 
 
 class ProfileForm(FlaskForm):
-    avatar = wtforms.FileField('Image')
+    avatar = wtforms.FileField(
+        'Image',
+        validators=[file.FileAllowed(['jpg', 'png', 'jpeg'], 'Images only')],
+    )
     username = wtforms.StringField('Username', validators=[DataRequired()])
     email = wtforms.EmailField('Email', validators=[DataRequired()])
     bio = wtforms.TextAreaField('Bio')
-    submit = wtforms.SubmitField('Sign up')
+    submit = wtforms.SubmitField('Accept changes')
