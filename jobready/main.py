@@ -64,6 +64,16 @@ def homepage():
     return render_template('not_auth_homepage.html')
 
 
+@app.route('/about')
+def about():
+    return render_template('about.html', title='JobReady | About')
+
+
+@app.route('/help')
+def help_e():
+    return render_template('help.html', title='JobReady | Help')
+
+
 def main():
     db_session.global_init('db/database.db')
     app.run(port=5000, host='127.0.0.1')
