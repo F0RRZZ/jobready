@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username | capitalize }}'s profile{% endblock %}
+
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data" style="display: flex; align-items: center; flex-direction: column">
+  {{ form.hidden_tag() }}
+  <img src="../{{ user.avatar }}" alt="Avatar" width="300" height="300" style="border: 1px solid black; border-radius: 50%">
+  <p>
+    {{ form.avatar.label }}<br>
+    {{ form.avatar(class="form-control", style="width: 300px;") }}<br>
+    {% for error in form.avatar.errors %}
+  <p class="alert alert-danger" role="alert">
+    {{ error }}
+  </p>
+  </p>
+  {% endfor %}
+
+  <p>
+    {{ form.username.label }}<br>
+    {{ form.username(class="form-control", type="text", style="width: 300px;", value=user.username) }}<br>
+    {% for error in form.username.errors %}
+  <p class="alert alert-danger" role="alert">
+    {{ error }}
+  </p>
+  {% endfor %}
+  </p>
+
+  <p>
+    {{ form.email.label }}<br>
+    {{ form.email(class="form-control", type="email", style="width: 300px;", value=user.email) }}<br>
+    {% for error in form.email.errors %}
+  <p class="alert alert-danger" role="alert">
+    {{ error }}
+  </p>
+  {% endfor %}
+  </p>
+
+  <p>
+    {{ form.bio.label }}<br>
+    <textarea id="bio" name="bio" class="form-control" rows="5" style="width: 300px;">{{ user.bio }}</textarea>
+    {% for error in form.bio.errors %}
+  <p class="alert alert-danger" role="alert">
+    {{ error }}
+  </p>
+  {% endfor %}
+  </p>
+  <p>{{ form.submit(type="submit", class="btn btn-primary", value="Accept changes") }}</p>
+</form>
+{% endblock %}
