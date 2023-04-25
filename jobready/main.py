@@ -7,6 +7,8 @@ from werkzeug.utils import secure_filename
 
 from data import db_session
 from data.users import User
+from data.templates import Template
+from data.resumes import Resume
 from data.users_resource import UsersResource, UsersListResource
 from forms.user import RegisterForm, LoginForm, ProfileForm
 
@@ -102,10 +104,12 @@ def profile(user_id):
     return render_template('profile.html', form=form, user=user)
 
 
-@app.route('/resume/create/<string:template_name>', methods=['GET', 'POST'])
+@app.route('/resume/create/<int:template_id>', methods=['GET', 'POST'])
 @flask_login.login_required
-def create_resume(template_name):
-    return render_template('resume_edit.html')
+def create_resume(template_id):
+    db_sess = db_session.create_session()
+    template_file = db_sess.query(Template).get(template_id)
+    return render_template(template_file.template_path)
 
 
 @app.route('/resume/edit/<int:resume_id>', methods=['GET', 'POST'])
@@ -114,10 +118,12 @@ def edit_resume(resume_id):
     return render_template('resume_edit.html')
 
 
-@app.route('/templates')
+@app.route('/templates', methods=['GET'])
 @flask_login.login_required
 def templates():
-    return render_template('templates.html')
+    db_sess = db_session.create_session()
+    templates_list = db_sess.query(Template).all()
+    return render_template('templates.html', templates_list=templates_list)
 
 
 @app.route('/help')
@@ -128,12 +134,12 @@ def help_():
 
 @app.route('/about')
 def about():
-    return render_template('about.html', title='JobReady | About')
+    return render_template('about.html', title='About')
 
 
 @app.route('/help')
 def help_e():
-    return render_template('help.html', title='JobReady | Help')
+    return render_template('help.html', title='Help')
 
 
 def main():

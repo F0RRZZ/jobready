@@ -16,6 +16,9 @@ class Resume(SerializerMixin, SqlAlchemyBase):
     user_id = sqlalchemy.Column(
         sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id')
     )
+    template_id = sqlalchemy.Column(
+        sqlalchemy.Integer, sqlalchemy.ForeignKey('templates.id')
+    )
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     image = sqlalchemy.Column(sqlalchemy.LargeBinary, nullable=True)
     position = sqlalchemy.Column(sqlalchemy.String, nullable=True)
@@ -25,5 +28,5 @@ class Resume(SerializerMixin, SqlAlchemyBase):
     expierence = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     education = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     achievments = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    template_name = sqlalchemy.Column(sqlalchemy.String)
+    template_name = orm.relationship('Template')
     user = orm.relationship('User')
