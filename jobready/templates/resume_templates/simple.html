@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block settings %}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+<script src="/static/js/resumes/simple.js"></script>
+<style>
+  .top {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  h1, h2, h3 {
+    margin: 0;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: normal;
+  }
+  h2 {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+  section {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul li {
+    margin-bottom: 10px;
+  }
+</style>
+<link href="/static/css/font_change.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="top">
+  <h1 contenteditable="true" id="name">Ваше имя</h1>
+  <h2 contenteditable="true" id="position">Backend разработчик</h2>
+  <ul>
+    <li contenteditable="true" id="place_of_residence">ул. Улица, д. 1, кв.</li>
+    <li contenteditable="true" id="email">example@example.com</li>
+  </ul>
+</div>
+<section>
+  <h2>Обо мне:</h2>
+  <div>
+    <textarea id="bio" name="bio"></textarea>
+    <input type="hidden" id="hidden_bio" name="hidden_bio">
+  </div>
+</section>
+<section>
+  <h2>Опыт работы</h2>
+  <div>
+    <textarea id="experience" name="experience"></textarea>
+    <input type="hidden" id="hidden_experience" name="hidden_experience">
+  </div>
+</section>
+<section>
+  <h2>Опыт работы</h2>
+  <div>
+    <textarea id="education" name="education"></textarea>
+    <input type="hidden" id="hidden_education" name="hidden_education">
+  </div>
+</section>
+<section>
+  <h2>Навыки</h2>
+  <div>
+    <textarea id="skills" name="skills"></textarea>
+    <input type="hidden" id="hidden_skills" name="hidden_skills">
+  </div>
+</section>
+<section>
+  <h2>Контакты</h2>
+  <div>
+    <textarea id="contacts" name="skills"></textarea>
+    <input type="hidden" id="hidden_contacts" name="hidden_skills">
+  </div>
+</section>
+{% endblock %}
