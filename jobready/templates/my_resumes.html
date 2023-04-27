@@ -18,7 +18,7 @@
     <th scope="row">{{ loop.index }}</th>
     <td>Resume #{{ loop.index }}</td>
     <td>{{ resume.template_name.template_name }}</td>
-    <td><a href="#"><button class="btn btn-primary" style="width: 100px;">Edit</button></a></td>
+    <td><a href="{{ url_for('edit_resume', resume_id=resume.id) }}"><button class="btn btn-primary" style="width: 100px;">Edit</button></a></td>
   </tr>
   {% endfor %}
   </tbody>

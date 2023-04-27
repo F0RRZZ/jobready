@@ -138,14 +138,45 @@ def create_resume(template_id):
         db_sess.commit()
         return redirect('/')
     template_file = db_sess.query(Template).get(template_id)
-    return render_template(template_file.template_path, template_file=template_file, form=form)
+    return render_template(
+        template_file.template_path,
+        template_file=template_file,
+        resume=None,
+        form=form,
+    )
 
 
 @app.route('/resume/edit/<int:resume_id>', methods=['GET', 'POST'])
 @flask_login.login_required
 def edit_resume(resume_id):
     db_sess = db_session.create_session()
-    return render_template('resume_edit.html')
+    resume = db_sess.query(Resume).get(resume_id)
+    template = db_sess.query(Template).get(resume.template_id)
+    form = ResumeForm()
+    if form.validate_on_submit() and request.method == 'POST':
+        name = request.form.get('name')
+        position = request.form.get('position')
+        place_of_residence = request.form.get('place_of_residence')
+        email = request.form.get('email')
+        bio = request.form.get('bio')
+        experience = request.form.get('experience')
+        education = request.form.get('education')
+        skills = request.form.get('skills')
+        contacts = request.form.get('contacts')
+
+        resume = db_sess.query(Resume).get(resume_id)
+        resume.name = name
+        resume.position = position
+        resume.place_of_residence = place_of_residence
+        resume.email = email
+        resume.bio = bio
+        resume.experience = experience
+        resume.education = education
+        resume.skills = skills
+        resume.contacts = contacts
+        db_sess.commit()
+        return redirect('/')
+    return render_template(template.template_path, resume=resume, form=form, template_file=template)
 
 
 @app.route('/my_resumes', methods=['GET'])

@@ -42,41 +42,64 @@
 <link href="/static/css/font_change.css" rel="stylesheet">
 {% endblock %}
 {% block content %}
+{% if resume %}
+<form method="post" action="{{ url_for('edit_resume', resume_id=resume.id) }}">
+{% else %}
 <form method="post" action="{{ url_for('create_resume', template_id=template_file.id) }}">
+  {% endif %}
   {{ form.hidden_tag() }}
   <div class="top">
-    {{ form.name(type="text", placeholder="Your name") }}<br>
-    {{ form.position(type="text", placeholder="Position") }}<br>
-    <ul>
-      {{ form.place_of_residence(type="text", placeholder="Your address") }}<br>
-      {{ form.email(type="text", placeholder="example@example.com") }}<br>
-    </ul>
-    {{ form.image(style='float: right') }}<br>
-    {% for error in form.image.errors %}
-    <p class="alert alert-danger" role="alert">
-      {{ error }}
-    </p>
+    {% if resume %}
+      {{ form.name(type="text", placeholder="Your name", value=resume.name) }}<br>
+      {{ form.position(type="text", placeholder="Position", value=resume.position) }}<br>
+      <ul>
+        {{ form.place_of_residence(type="text", placeholder="Your address", value=resume.place_of_residence) }}<br>
+        {{ form.email(type="text", placeholder="example@example.com", value=resume.email) }}<br>
+      </ul>
+      {{ form.image(style='float: right') }}<br>
+      {% for error in form.image.errors %}
+      <p class="alert alert-danger" role="alert">
+        {{ error }}
+      </p>
+      {% endfor %}
+    {% else %}
+      {{ form.name(type="text", placeholder="Your name") }}<br>
+      {{ form.position(type="text", placeholder="Position") }}<br>
+      <ul>
+        {{ form.place_of_residence(type="text", placeholder="Your address") }}<br>
+        {{ form.email(type="text", placeholder="example@example.com") }}<br>
+      </ul>
+      {{ form.image(style='float: right') }}<br>
+      {% for error in form.image.errors %}
+      <p class="alert alert-danger" role="alert">
+        {{ error }}
+      </p>
     {% endfor %}
+    {% endif %}
   </div>
   <section>
     <h2>About me:</h2>
-    {{ form.bio(type="textarea", id="bio") }}
+    <textarea id="bio" name="bio">{% if resume %}{{ resume.bio }}{% endif %}</textarea>
   </section>
   <section>
-    <h2>Experients</h2>
-    {{ form.experience(type="textarea", id="experience") }}
+    <h2>Experience</h2>
+    <textarea id="experience" name="experience">{% if resume %}{{ resume.experience }}{% endif %}</textarea>
   </section>
   <section>
     <h2>Skills</h2>
-    {{ form.skills(type="textarea", id="skills") }}
+    <textarea id="skills" name="skills">{% if resume %}{{ resume.skills }}{% endif %}</textarea>
   </section>
   <section>
     <h2>Achievments</h2>
-    {{ form.achievments(type="textarea", id="achievments") }}
+    <textarea id="achievments" name="achievments">{% if resume %}{% if resume.achievments %}{{ resume.achievments }}{% endif %}{% endif %}</textarea>
+  </section>
+  <section>
+    <h2>Education</h2>
+    <textarea id="education" name="education">{% if resume %}{% if resume.education %}{{ resume.education }}{% endif %}{% endif %}</textarea>
   </section>
   <section>
     <h2>Contacts</h2>
-    {{ form.contacts(type="textarea", id="contacts") }}
+    <textarea id="contacts" name="contacts">{% if resume %}{{ resume.contacts }}{% endif %}</textarea>
   </section>
   <p style="text-align: center; margin: 20px;">
     <button type="submit" class="btn btn-primary">Save</button>
