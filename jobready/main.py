@@ -216,18 +216,19 @@ def templates():
     return render_template('templates.html', templates_list=templates_list)
 
 
-@app.route('/help')
-@flask_login.login_required
-def help_():
-    return render_template('help.html')
+# @app.route('/help')
+
+# def help_():
+#     return render_template('help.html', title='Help')
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html', title='About')
+    return render_template('about.html')
 
 
 @app.route('/help')
+@flask_login.login_required
 def help_e():
     return render_template('help.html', title='Help')
 

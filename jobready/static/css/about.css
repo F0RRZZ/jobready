@@ -1,0 +1,30 @@
+.container {
+    text-align: center;
+    max-width: 800px;
+}
+
+
+p {
+    font-size: 1rem;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.1px;
+}
+
+.header {
+    background-color: #FFEBEB;
+}
+
+.header h1 {
+    margin: 100px;
+}
+
+.picture_maslom {
+    max-height: 300px;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
