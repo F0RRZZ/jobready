@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, redirect, render_template, request
 import flask_login
+from flask_login import current_user
 from flask_restful import Api
 from werkzeug.utils import secure_filename
 
@@ -10,6 +11,7 @@ from data.users import User
 from data.templates import Template
 from data.resumes import Resume
 from data.users_resource import UsersResource, UsersListResource
+from forms.resume import ResumeForm
 from forms.user import RegisterForm, LoginForm, ProfileForm
 
 app = Flask(__name__)
@@ -108,14 +110,50 @@ def profile(user_id):
 @flask_login.login_required
 def create_resume(template_id):
     db_sess = db_session.create_session()
+    form = ResumeForm()
+    if form.validate_on_submit() and request.method == 'POST':
+        name = request.form.get('name')
+        position = request.form.get('position')
+        place_of_residence = request.form.get('place_of_residence')
+        email = request.form.get('email')
+        bio = request.form.get('bio')
+        experience = request.form.get('experience')
+        education = request.form.get('education')
+        skills = request.form.get('skills')
+        contacts = request.form.get('contacts')
+        resume = Resume(
+            user_id=current_user.id,
+            template_id=template_id,
+            name=name,
+            position=position,
+            place_of_residence=place_of_residence,
+            email=email,
+            bio=bio,
+            experience=experience,
+            education=education,
+            skills=skills,
+            contacts=contacts,
+        )
+        db_sess.add(resume)
+        db_sess.commit()
+        return redirect('/')
     template_file = db_sess.query(Template).get(template_id)
-    return render_template(template_file.template_path)
+    return render_template(template_file.template_path, template_file=template_file, form=form)
 
 
 @app.route('/resume/edit/<int:resume_id>', methods=['GET', 'POST'])
 @flask_login.login_required
 def edit_resume(resume_id):
+    db_sess = db_session.create_session()
     return render_template('resume_edit.html')
+
+
+@app.route('/my_resumes', methods=['GET'])
+@flask_login.login_required
+def my_resumes():
+    db_sess = db_session.create_session()
+    resumes_list = db_sess.query(Resume).filter(Resume.user_id==current_user.id).all()
+    return render_template('my_resumes.html', resumes_list=resumes_list)
 
 
 @app.route('/templates', methods=['GET'])

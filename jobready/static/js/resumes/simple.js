@@ -3,12 +3,6 @@ tinymce.init({
     plugins: 'lists link',
     toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
     menubar: false,
-    setup: function(editor) {
-        editor.on('change', function() {
-            var content = editor.getContent();
-            $('#hidden_bio').val(content);
-        });
-    }
 });
 
 tinymce.init({
@@ -16,12 +10,6 @@ tinymce.init({
     plugins: 'lists link',
     toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
     menubar: false,
-    setup: function(editor) {
-        editor.on('change', function() {
-            var content = editor.getContent();
-            $('#hidden_experience').val(content);
-        });
-    }
 });
 
 tinymce.init({
@@ -29,12 +17,6 @@ tinymce.init({
     plugins: 'lists link',
     toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
     menubar: false,
-    setup: function(editor) {
-        editor.on('change', function() {
-            var content = editor.getContent();
-            $('#hidden_education').val(content);
-        });
-    }
 });
 
 tinymce.init({
@@ -42,12 +24,6 @@ tinymce.init({
     plugins: 'lists link',
     toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
     menubar: false,
-    setup: function(editor) {
-        editor.on('change', function() {
-            var content = editor.getContent();
-            $('#hidden_skills').val(content);
-        });
-    }
 });
 
 tinymce.init({
@@ -55,10 +31,11 @@ tinymce.init({
     plugins: 'lists link',
     toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
     menubar: false,
-    setup: function(editor) {
-        editor.on('change', function() {
-            var content = editor.getContent();
-            $('#hidden_contacts').val(content);
-        });
-    }
+});
+
+tinymce.init({
+    selector: '#achievments',
+    plugins: 'lists link',
+    toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
+    menubar: false,
 });

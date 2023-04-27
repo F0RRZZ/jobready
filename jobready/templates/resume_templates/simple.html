@@ -36,51 +36,50 @@
   ul li {
     margin-bottom: 10px;
   }
+
+
 </style>
 <link href="/static/css/font_change.css" rel="stylesheet">
 {% endblock %}
 {% block content %}
-<div class="top">
-  <h1 contenteditable="true" id="name">Ваше имя</h1>
-  <h2 contenteditable="true" id="position">Backend разработчик</h2>
-  <ul>
-    <li contenteditable="true" id="place_of_residence">ул. Улица, д. 1, кв.</li>
-    <li contenteditable="true" id="email">example@example.com</li>
-  </ul>
-</div>
-<section>
-  <h2>Обо мне:</h2>
-  <div>
-    <textarea id="bio" name="bio"></textarea>
-    <input type="hidden" id="hidden_bio" name="hidden_bio">
+<form method="post" action="{{ url_for('create_resume', template_id=template_file.id) }}">
+  {{ form.hidden_tag() }}
+  <div class="top">
+    {{ form.name(type="text", placeholder="Your name") }}<br>
+    {{ form.position(type="text", placeholder="Position") }}<br>
+    <ul>
+      {{ form.place_of_residence(type="text", placeholder="Your address") }}<br>
+      {{ form.email(type="text", placeholder="example@example.com") }}<br>
+    </ul>
+    {{ form.image(style='float: right') }}<br>
+    {% for error in form.image.errors %}
+    <p class="alert alert-danger" role="alert">
+      {{ error }}
+    </p>
+    {% endfor %}
   </div>
-</section>
-<section>
-  <h2>Опыт работы</h2>
-  <div>
-    <textarea id="experience" name="experience"></textarea>
-    <input type="hidden" id="hidden_experience" name="hidden_experience">
-  </div>
-</section>
-<section>
-  <h2>Опыт работы</h2>
-  <div>
-    <textarea id="education" name="education"></textarea>
-    <input type="hidden" id="hidden_education" name="hidden_education">
-  </div>
-</section>
-<section>
-  <h2>Навыки</h2>
-  <div>
-    <textarea id="skills" name="skills"></textarea>
-    <input type="hidden" id="hidden_skills" name="hidden_skills">
-  </div>
-</section>
-<section>
-  <h2>Контакты</h2>
-  <div>
-    <textarea id="contacts" name="skills"></textarea>
-    <input type="hidden" id="hidden_contacts" name="hidden_skills">
-  </div>
-</section>
+  <section>
+    <h2>About me:</h2>
+    {{ form.bio(type="textarea", id="bio") }}
+  </section>
+  <section>
+    <h2>Experients</h2>
+    {{ form.experience(type="textarea", id="experience") }}
+  </section>
+  <section>
+    <h2>Skills</h2>
+    {{ form.skills(type="textarea", id="skills") }}
+  </section>
+  <section>
+    <h2>Achievments</h2>
+    {{ form.achievments(type="textarea", id="achievments") }}
+  </section>
+  <section>
+    <h2>Contacts</h2>
+    {{ form.contacts(type="textarea", id="contacts") }}
+  </section>
+  <p style="text-align: center; margin: 20px;">
+    <button type="submit" class="btn btn-primary">Save</button>
+  </p>
+</form>
 {% endblock %}

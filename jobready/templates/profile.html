@@ -3,9 +3,11 @@
 {% block title %}{{ user.username | capitalize }}'s profile{% endblock %}
 
 {% block content %}
-<form action="" method="POST" enctype="multipart/form-data" style="display: flex; align-items: center; flex-direction: column">
+<form action="" method="POST" enctype="multipart/form-data"
+      style="display: flex; align-items: center; flex-direction: column">
   {{ form.hidden_tag() }}
-  <img src="../{{ user.avatar }}" alt="Avatar" width="300" height="300" style="border: 1px solid black; border-radius: 50%">
+  <img src="../{{ user.avatar }}" alt="Avatar" width="300" height="300"
+       style="border: 1px solid black; border-radius: 50%">
   <p>
     {{ form.avatar.label }}<br>
     {{ form.avatar(class="form-control", style="width: 300px;") }}<br>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}My Resumes{% endblock %}
+
+{% block content %}
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Template</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for resume in resumes_list %}
+  <tr>
+    <th scope="row">{{ loop.index }}</th>
+    <td>Resume #{{ loop.index }}</td>
+    <td>{{ resume.template_name.template_name }}</td>
+    <td><a href="#"><button class="btn btn-primary" style="width: 100px;">Edit</button></a></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
