@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, abort
 import flask_login
 from flask_login import current_user
 from flask_restful import Api
@@ -151,6 +151,8 @@ def create_resume(template_id):
 def edit_resume(resume_id):
     db_sess = db_session.create_session()
     resume = db_sess.query(Resume).get(resume_id)
+    if (not resume) or resume.user_id != current_user.id:
+        return abort(404)
     template = db_sess.query(Template).get(resume.template_id)
     form = ResumeForm()
     if form.validate_on_submit() and request.method == 'POST':
@@ -176,14 +178,33 @@ def edit_resume(resume_id):
         resume.contacts = contacts
         db_sess.commit()
         return redirect('/')
-    return render_template(template.template_path, resume=resume, form=form, template_file=template)
+    return render_template(
+        template.template_path,
+        resume=resume,
+        form=form,
+        template_file=template,
+    )
+
+
+@app.route('/resume/delete/<int:resume_id>')
+@flask_login.login_required
+def delete_resume(resume_id):
+    db_sess = db_session.create_session()
+    resume = db_sess.query(Resume).get(resume_id)
+    if (not resume) or resume.user_id != current_user.id:
+        return abort(404)
+    db_sess.delete(resume)
+    db_sess.commit()
+    return redirect('/my_resumes')
 
 
 @app.route('/my_resumes', methods=['GET'])
 @flask_login.login_required
 def my_resumes():
     db_sess = db_session.create_session()
-    resumes_list = db_sess.query(Resume).filter(Resume.user_id==current_user.id).all()
+    resumes_list = (
+        db_sess.query(Resume).filter(Resume.user_id == current_user.id).all()
+    )
     return render_template('my_resumes.html', resumes_list=resumes_list)
 
 
