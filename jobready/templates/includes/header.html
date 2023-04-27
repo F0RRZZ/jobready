@@ -12,12 +12,12 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="/templates" class="nav-link px-2 text-black">Templates</a></li>
-          <li><a href="#" class="nav-link px-2 text-black">My Resumes</a></li>
+          <li><a href="/my_resumes" class="nav-link px-2 text-black">My Resumes</a></li>
           <li><a href="/help" class="nav-link px-2 text-black">Help</a></li>
         </ul>
 
         <div class="text-end">
-          <a href="logout"><button type="button" class="btn btn-outline-black me-2">Logout</button></a>
+          <a href="/logout"><button type="button" class="btn btn-outline-black me-2">Logout</button></a>
           <a href="{{ url_for('profile', user_id=current_user.id) }}"><button type="button" class="btn btn-warning">{{ current_user.username }}</button></a>
         </div>
       </div>

@@ -11,6 +11,7 @@
     <th scope="col">Template</th>
     <th scope="col"></th>
     <th scope="col"></th>
+    <th scope="col"></th>
   </tr>
   </thead>
   <tbody>
@@ -20,6 +21,7 @@
     <td>Resume #{{ loop.index }}</td>
     <td>{{ resume.template_name.template_name }}</td>
     <td><a href="{{ url_for('edit_resume', resume_id=resume.id) }}"><button class="btn btn-primary" style="width: 100px;">Edit</button></a></td>
+    <td><a href="{{ url_for('download_resume', resume_id=resume.id) }}"><button class="btn btn-primary" style="width: 200px;">Download PDF</button></a></td>
     <td><a href="{{ url_for('delete_resume', resume_id=resume.id) }}"><button class="btn btn-danger" style="width: 100px;">Delete</button></a></td>
   </tr>
   {% endfor %}

@@ -1,10 +1,11 @@
 import os
 
-from flask import Flask, redirect, render_template, request, abort
+from flask import Flask, abort, redirect, render_template, request, send_file
 import flask_login
 from flask_login import current_user
 from flask_restful import Api
 from werkzeug.utils import secure_filename
+from xhtml2pdf import pisa
 
 from data import db_session
 from data.users import User
@@ -121,6 +122,7 @@ def create_resume(template_id):
         education = request.form.get('education')
         skills = request.form.get('skills')
         contacts = request.form.get('contacts')
+        achievments = request.form.get('achievments')
         resume = Resume(
             user_id=current_user.id,
             template_id=template_id,
@@ -132,6 +134,7 @@ def create_resume(template_id):
             experience=experience,
             education=education,
             skills=skills,
+            achievments=achievments,
             contacts=contacts,
         )
         db_sess.add(resume)
@@ -163,6 +166,7 @@ def edit_resume(resume_id):
         bio = request.form.get('bio')
         experience = request.form.get('experience')
         education = request.form.get('education')
+        achievments = request.form.get('achievments')
         skills = request.form.get('skills')
         contacts = request.form.get('contacts')
 
@@ -196,6 +200,32 @@ def delete_resume(resume_id):
     db_sess.delete(resume)
     db_sess.commit()
     return redirect('/my_resumes')
+
+
+@app.route('/resume/download/<int:resume_id>')
+@flask_login.login_required
+def download_resume(resume_id):
+    db_sess = db_session.create_session()
+    resume = db_sess.query(Resume).get(resume_id)
+    if (not resume) or resume.user_id != current_user.id:
+        return abort(404)
+    template = db_sess.query(Template).get(resume.template_id)
+    path = (
+            template.template_path[:template.template_path.find('.')] +
+            '_render' +
+            '.html'
+    )
+    resume_code = render_template(
+        path,
+        resume=resume,
+    )
+    pdf_file = f'static/temp/{resume.id}.pdf'
+    with open(pdf_file, 'w') as f:
+        ...
+    output_file = open(pdf_file, 'wb')
+    pisa.CreatePDF(resume_code, dest=output_file)
+    output_file.close()
+    return send_file(pdf_file, as_attachment=True)
 
 
 @app.route('/my_resumes', methods=['GET'])

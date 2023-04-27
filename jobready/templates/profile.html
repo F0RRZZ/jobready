@@ -40,7 +40,7 @@
 
   <p>
     {{ form.bio.label }}<br>
-    <textarea id="bio" name="bio" class="form-control" rows="5" style="width: 300px;">{{ user.bio }}</textarea>
+    <textarea id="bio" name="bio" class="form-control" rows="5" style="width: 300px;">{% if user.bio %}{{ user.bio }}{% endif %}</textarea>
     {% for error in form.bio.errors %}
   <p class="alert alert-danger" role="alert">
     {{ error }}
