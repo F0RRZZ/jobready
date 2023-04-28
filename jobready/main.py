@@ -255,12 +255,6 @@ def templates():
     return render_template('templates.html', templates_list=templates_list)
 
 
-# @app.route('/help')
-
-# def help_():
-#     return render_template('help.html', title='Help')
-
-
 @app.route('/about')
 def about():
     return render_template('about.html')
