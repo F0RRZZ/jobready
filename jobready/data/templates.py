@@ -13,7 +13,13 @@ class Template(SerializerMixin, SqlAlchemyBase):
         primary_key=True,
         autoincrement=True,
     )
-    preview = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    preview = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
     template_name = sqlalchemy.Column(sqlalchemy.String)
     template_path = sqlalchemy.Column(sqlalchemy.String)
-    resumes = orm.relationship('Resume', back_populates='template_name')
+    resumes = orm.relationship(
+        'Resume',
+        back_populates='template_name',
+    )

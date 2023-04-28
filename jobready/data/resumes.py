@@ -14,21 +14,56 @@ class Resume(SerializerMixin, SqlAlchemyBase):
         autoincrement=True,
     )
     user_id = sqlalchemy.Column(
-        sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id')
+        sqlalchemy.Integer,
+        sqlalchemy.ForeignKey('users.id'),
     )
     template_id = sqlalchemy.Column(
-        sqlalchemy.Integer, sqlalchemy.ForeignKey('templates.id')
+        sqlalchemy.Integer,
+        sqlalchemy.ForeignKey('templates.id'),
     )
-    name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    image = sqlalchemy.Column(sqlalchemy.LargeBinary, nullable=True)
-    position = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    email = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    bio = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    place_of_residence = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    skills = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    experience = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    education = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    achievments = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    contacts = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    name = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
+    image = sqlalchemy.Column(
+        sqlalchemy.LargeBinary,
+        nullable=True,
+    )
+    position = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
+    email = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
+    bio = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
+    place_of_residence = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
+    skills = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
+    experience = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
+    education = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
+    achievments = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
+    contacts = sqlalchemy.Column(
+        sqlalchemy.String,
+        nullable=True,
+    )
     template_name = orm.relationship('Template')
     user = orm.relationship('User')
