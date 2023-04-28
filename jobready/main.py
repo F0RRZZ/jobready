@@ -1,11 +1,12 @@
 import os
+import requests
 
+from dotenv import load_dotenv
 from flask import Flask, abort, redirect, render_template, request, send_file
 import flask_login
 from flask_login import current_user
 from flask_restful import Api
 from werkzeug.utils import secure_filename
-from xhtml2pdf import pisa
 
 from data import db_session
 from data.users import User
@@ -15,9 +16,11 @@ from data.users_resource import UsersResource, UsersListResource
 from forms.resume import ResumeForm
 from forms.user import RegisterForm, LoginForm, ProfileForm
 
+load_dotenv()
+
 app = Flask(__name__)
 api = Api(app)
-app.config['SECRET_KEY'] = 'dummy_key'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
@@ -122,7 +125,6 @@ def create_resume(template_id):
         education = request.form.get('education')
         skills = request.form.get('skills')
         contacts = request.form.get('contacts')
-        achievments = request.form.get('achievments')
         resume = Resume(
             user_id=current_user.id,
             template_id=template_id,
@@ -134,7 +136,6 @@ def create_resume(template_id):
             experience=experience,
             education=education,
             skills=skills,
-            achievments=achievments,
             contacts=contacts,
         )
         db_sess.add(resume)
@@ -166,7 +167,6 @@ def edit_resume(resume_id):
         bio = request.form.get('bio')
         experience = request.form.get('experience')
         education = request.form.get('education')
-        achievments = request.form.get('achievments')
         skills = request.form.get('skills')
         contacts = request.form.get('contacts')
 
@@ -210,21 +210,30 @@ def download_resume(resume_id):
     if (not resume) or resume.user_id != current_user.id:
         return abort(404)
     template = db_sess.query(Template).get(resume.template_id)
+    url = 'https://yakpdf.p.rapidapi.com/pdf'
     path = (
-            template.template_path[:template.template_path.find('.')] +
-            '_render' +
-            '.html'
+        template.template_path[: template.template_path.find('.')]
+        + '_render'
+        + '.html'
     )
     resume_code = render_template(
         path,
         resume=resume,
     )
-    pdf_file = f'static/temp/{resume.id}.pdf'
-    with open(pdf_file, 'w') as f:
-        ...
-    output_file = open(pdf_file, 'wb')
-    pisa.CreatePDF(resume_code, dest=output_file)
-    output_file.close()
+    payload = {
+        'pdf': {'format': 'A4', 'printBackground': True, 'scale': 1},
+        'source': {'html': resume_code},
+        'wait': {'for': 'navigation', 'timeout': 250, 'waitUntil': 'load'},
+    }
+    headers = {
+        'content-type': 'application/json',
+        'X-RapidAPI-Key': os.getenv('API_KEY'),
+        'X-RapidAPI-Host': 'yakpdf.p.rapidapi.com',
+    }
+    response = requests.post(url, json=payload, headers=headers)
+    pdf_file = f'static/temp/{resume_id}.pdf'
+    with open(pdf_file, mode='wb') as f:
+        f.write(response.content)
     return send_file(pdf_file, as_attachment=True)
 
 

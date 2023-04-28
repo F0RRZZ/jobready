@@ -1,3 +1,4 @@
+<html>
 <head>
   <script src="/static/js/resumes/simple.js"></script>
   <style>
@@ -43,11 +44,11 @@
 </head>
 <body>
 <div class="top">
-  <h2>{{ resume.name }}</h2><br>
-  <h3>{{ resume.position }}</h3><br>
+  <h2>{{ resume.name }}</h2>
+  <h3>{{ resume.position }}</h3>
   <ul>
     <li>{{ resume.place_of_residence }}</li>
-    <li>{{ resume.email }}
+    <li>{{ resume.email }}</li>
   </ul>
 </div>
 <section>
@@ -75,3 +76,4 @@
   {{ resume.contacts | safe }}
 </section>
 </body>
+</html>
