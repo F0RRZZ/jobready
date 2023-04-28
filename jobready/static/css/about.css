@@ -3,20 +3,32 @@
     max-width: 800px;
 }
 
-
-p {
-    font-size: 1rem;
+.about_name {
+    background-color: #ECF2FF;
+    text-align: center;
+    height: 250px;
+    width: 100%;
+    margin-top: 0px;
+    padding-top: 90px;
+    margin-bottom: 50px;
 }
 
-* {
+.about_name h1 {
+    font-size: 4rem;
+}
+
+
+
+.about_p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.3rem;
     letter-spacing: 0.1px;
 }
 
-.header {
-    background-color: #FFEBEB;
+h2 {
+    font-size: 2.5rem;
 }
+
 
 .header h1 {
     margin: 100px;
@@ -28,3 +40,4 @@ p {
     margin-top: 0px;
     margin-bottom: 40px;
 }
+
