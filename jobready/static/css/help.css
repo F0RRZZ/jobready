@@ -1,0 +1,33 @@
+.container {
+    text-align: center;
+    max-width: 800px;
+}
+
+.help_name {
+    background-color: #ECF2FF;
+    text-align: center;
+    height: 250px;
+    width: 100%;
+    margin-top: 0px;
+    padding-top: 90px;
+    margin-bottom: 50px;
+    font-size: 4rem;
+}
+
+
+
+
+.help_p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.1px;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+
+.header h1 {
+    margin: 100px;
+}

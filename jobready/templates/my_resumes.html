@@ -3,6 +3,7 @@
 {% block title %}My Resumes{% endblock %}
 
 {% block content %}
+<link href="../static/css/my_resumes.css" rel="stylesheet">
 <table class="table">
   <thead>
   <tr>
@@ -19,10 +20,10 @@
     <th scope="row">{{ loop.index }}</th>
     <td>Resume #{{ loop.index }}</td>
     <td>{{ resume.template_name.template_name }}</td>
-    <td><a href="{{ url_for('edit_resume', resume_id=resume.id) }}"><button class="btn btn-primary" style="width: 100px;">Edit</button></a></td>
-    <td><a href="{{ url_for('delete_resume', resume_id=resume.id) }}"><button class="btn btn-danger" style="width: 100px;">Delete</button></a></td>
+    <td class="some"><a href="{{ url_for('edit_resume', resume_id=resume.id) }}"><button class="btn btn-primary" style="width: 100px;">Edit</button></a></td>
+    <td class="some"><a href="{{ url_for('delete_resume', resume_id=resume.id) }}"><button class="btn btn-danger" style="width: 100px;">Delete</button></a></td>
   </tr>
   {% endfor %}
-  </tbody>
+  </tbody><br><br><br>
 </table>
 {% endblock %}
