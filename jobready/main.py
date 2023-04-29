@@ -266,11 +266,14 @@ def help_e():
     return render_template('help.html', title='Help')
 
 
+db_session.global_init('db/database.db')
+
+
 def main():
-    db_session.global_init('db/database.db')
     api.add_resource(UsersResource, '/api/users/<int:user_id>')
     api.add_resource(UsersListResource, '/api/users')
     app.run(port=5000, host='127.0.0.1')
 
 
-main()
+if __name__ == '__main__':
+    main()
